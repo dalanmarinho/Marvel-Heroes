@@ -8,10 +8,13 @@ const Filter = ({ onIncrement, personagens }) => {
   if (!localStorageData) {
     localStorage.setItem("personagens", JSON.stringify(personagensData));
   }
-  
+
   function checkSize() {
     //console.log(personagens);
-    return (personagens?.length === localStorageData?.length);
+    if(localStorageData){
+      return (personagens?.length === localStorageData?.length);
+    }
+    return true;
   }
 
   const onClickButton = () => {
