@@ -52,7 +52,6 @@ const HomePage = () => {
   function filterPersonagem(tipo) {
     if (tipo !== '') {
       setFiltroState((filtro) => true);
-      setPersonagem((personagens) => [...localStorageData]);
       setPersonagem((personagens) => [...personagens.filter((item) => item.tipo === tipo)]);
     } else {
       setFiltroState((filtro) => false);
@@ -64,7 +63,7 @@ const HomePage = () => {
 
     if ((personagens?.length < localStorageData?.length) && !filtro) {
       //console.log('useEffect ',personagens)
-      setPersonagem((personagens) => [...localStorageData]);
+      setPersonagem(localStorageData);
     }
   }, [personagens]);
 
