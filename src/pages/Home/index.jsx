@@ -60,7 +60,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!localStorageData) {
-      localStorage?.setItem("personagens", JSON.stringify(personagensData));
+      localStorage.setItem("personagens", JSON.stringify(personagensData));
     }
 
     if ((personagens?.length < localStorageData?.length) && !filtro) {

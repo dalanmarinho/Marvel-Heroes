@@ -8,7 +8,7 @@ const Filter = ({ onIncrement, personagens }) => {
 
   function checkSize() {
     //console.log(personagens);
-    return (personagens.length === localStorageData.length);
+    return (personagens?.length === localStorageData?.length);
   }
 
   const onClickButton = () => {
