@@ -12,8 +12,8 @@ const HomePage = () => {
   const [personagens, setPersonagem] = useState([]);
   const [novosPersonagens, setNovosPersonagens] = useState(personagensData);
   const [filtro, setFiltroState] = useState(false);
-  const localStorageData = JSON.parse(localStorage.getItem("personagens"));
-  if (!localStorageData) {
+  const  localStorageData = JSON.parse(localStorage.getItem("personagens"));
+  if(!localStorageData){
     localStorage.setItem("personagens", JSON.stringify(personagensData));
   }
 
@@ -30,49 +30,39 @@ const HomePage = () => {
   }
 
   function search(param) {
+    let data;
     if (param !== '') {
-      const input = new RegExp(param + '.+$', 'i');
-      setFiltroState((filtro) => true);
-      setPersonagem((personagens) => [...localStorageData]);
-      setPersonagem((personagens) => [...personagens.filter((item) => checkName(input, param, item))]);
+      data = personagensData.filter((item) => item.nome.toUpperCase() === param.toUpperCase());
+      setPersonagem(data);
     } else {
-      setPersonagem(personagens);
+      setPersonagem(personagensData);
     }
-  }
-
-  function checkName(input, param, item) {
-    if (item.nome.toUpperCase() === param.toUpperCase()) {
-      return true;
-    } else if (item.nome.search(input) !== -1) {
-      return true;
-    }
-    return false;
   }
 
   function filterPersonagem(tipo) {
     if (tipo !== '') {
-      setFiltroState((filtro) => true);
-      setPersonagem((personagens) => [...personagens.filter((item) => item.tipo === tipo)]);
+      setFiltroState((filtro)=> true);
+      setPersonagem((personagens)=>[...localStorageData]);
+      setPersonagem((personagens)=>[...personagens.filter((item) => item.tipo === tipo)]);
     } else {
-      setFiltroState((filtro) => false);
+      setFiltroState((filtro)=> false);
       setPersonagem(localStorageData);
     }
   }
 
   useEffect(() => {
-
-    if ((personagens?.length < localStorageData?.length) && !filtro) {
+    if((personagens.length < localStorageData.length) && !filtro){
       //console.log('useEffect ',personagens)
-      setPersonagem(localStorageData);
+      setPersonagem((personagens)=>[...localStorageData]);
     }
   }, [personagens]);
 
-
+  
 
   return (
     <section>
       <Header onHanderSearch={(data) => handleSearch(data)} />
-      <Filter onIncrement={(tipo) => filterPersonagem(tipo)} personagens={personagens} />
+      <Filter onIncrement={(tipo) => filterPersonagem(tipo)} personagens={personagens?personagens:localStorageData} />
       <div className="App-card">
         {personagens.map((personagem) =>
           <Card
@@ -80,9 +70,6 @@ const HomePage = () => {
             personagem={personagem}
           />
         )}
-        {(personagens.length === 0)?
-        <h3>Nenhum resultado encontrado!</h3>
-        :null}
       </div>
     </section>
   );
