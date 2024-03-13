@@ -51,7 +51,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    if((personagens.length < localStorageData.length) && !filtro){
+    if((personagens?.length < localStorageData?.length) && !filtro){
       //console.log('useEffect ',personagens)
       setPersonagem((personagens)=>[...localStorageData]);
     }
