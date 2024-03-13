@@ -9,7 +9,7 @@ import Header from "../../components/Header";
 import Filter from "../../components/Filter";
 
 const HomePage = () => {
-  const [personagens, setPersonagem] = useState([]);
+  const [personagens, setPersonagem] = useState(personagensData);
   const [novosPersonagens, setNovosPersonagens] = useState(personagensData);
   const [filtro, setFiltroState] = useState(false);
   const  localStorageData = JSON.parse(localStorage.getItem("personagens"));
