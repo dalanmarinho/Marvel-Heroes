@@ -42,7 +42,7 @@ const HomePage = () => {
   function filterPersonagem(tipo) {
     if (tipo !== '') {
       setFiltroState((filtro)=> true);
-      setPersonagem((personagens)=>[...localStorageData]);
+      setPersonagem(personagensData);
       setPersonagem((personagens)=>[...personagens.filter((item) => item.tipo === tipo)]);
     } else {
       setFiltroState((filtro)=> false);
